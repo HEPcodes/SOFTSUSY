@@ -1,0 +1,19 @@
+# Products of ./configure
+Config/config.h
+Config/stamp-h1
+Makefile
+config.status
+config.log
+libtool
+doc/Makefile
+src/.deps
+src/Makefile
+
+# Products of make
+.dirstamp
+.libs
+src/*.lo
+src/*.o
+src/libsoft.la
+*.x
+
