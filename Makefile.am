@@ -1,9 +1,13 @@
 SUBDIRS = src doc
 
-ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
+ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 
-OUTPUTFILES = inOutFiles/slha2Output inOutFiles/lesHouchesOutput inOutFiles/rpvHouchesOutput \
- inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output inOutFiles/neutOutputTest \
+TESTOUTPUT = inOutFiles/slha2Output inOutFiles/lesHouchesOutput inOutFiles/rpvHouchesOutput \
+ inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output
+
+OUTPUTFILES = $(TESTOUTPUT) \
+ inOutFiles/neutOutputTest inOutFiles/rpvOutputTest \
+ inOutFiles/outputTest inOutFiles/outputTest-nmssm \
 benchmarks/cmssm10.1.1.spec benchmarks/cmssm10.1.2.spec \
 benchmarks/cmssm10.1.3.spec benchmarks/cmssm10.1.4.spec \
 benchmarks/cmssm10.1.5.spec \
@@ -84,6 +88,7 @@ benchmarks/rpv2.4.in benchmarks/rpv2.5.in \
 benchmarks/rpv3.1.in benchmarks/rpv3.2.in benchmarks/rpv3.3.in \
 benchmarks/rpv3.4.in benchmarks/rpv3.5.in 
 
+
 dist_pkgdata_DATA = softsusy_nmssmtools.x.in setup_nmssmtools.sh Makefile.nmssmtools $(INPUTFILES) $(OUTPUTFILES) CHANGES GUIDELINES COPYING $(DOCFILES)
 CLEANFILES=$(OUTPUTFILES) *.x
 
@@ -92,6 +97,9 @@ inOutFiles/%Output : inOutFiles/%Input softpoint.x
 
 inOutFiles/outputTest: softsusy.x
 	./softsusy.x > inOutFiles/outputTest
+
+inOutFiles/outputTest-nmssm: softsusy-nmssm.x
+	./softsusy-nmssm.x > inOutFiles/outputTest-nmssm
 
 inOutFiles/rpvOutputTest: rpvsoftsusy.x
 	./rpvsoftsusy.x > inOutFiles/rpvOutputTest
@@ -103,11 +111,11 @@ benchmarks/%.spec: benchmarks/%.in softpoint.x
 	$(install_sh) -d benchmarks
 	./softpoint.x leshouches < $< > $@
 
-.PHONY: doc test updateWeb
+.PHONY: $(SUBDIRS) test updateWeb
 
 test: softpoint.x
-	git checkout $(OUTPUTFILES)
-	cp $(OUTPUTFILES) .test; rm $(OUTPUTFILES); make $(OUTPUTFILES); \
+	git checkout $(TESTOUTPUT)
+	cp $(TESTOUTPUT) .test; rm $(TESTOUTPUT); make $(TESTOUTPUT); \
 	ndiff --relative-error 1.0e-3 inOutFiles/slha2Output .test/slha2Output; \
 	ndiff --relative-error 1.0e-3 inOutFiles/lesHouchesOutput .test/lesHouchesOutput; \
 	ndiff --relative-error 1.0e-3 inOutFiles/rpvHouchesOutput .test/rpvHouchesOutput; \
