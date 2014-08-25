@@ -1,5 +1,15 @@
 /* Config/config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Compile leading two-loop SUSY threshold corrections to fermionic third
+   generation Yukawa couplings */
+#undef COMPILE_FULL_SUSY_THRESHOLD
+
+/* Complile 3-loop RGE */
+#undef COMPILE_THREE_LOOP_RGE
+
+/* Threshold correction debugging output */
+#undef DEBUG
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
@@ -29,6 +39,9 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
+
+/* Looptools evaluation of Pasarino-Veltman functions */
+#undef LOOPTOOLS
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */

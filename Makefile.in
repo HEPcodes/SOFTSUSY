@@ -15,6 +15,15 @@
 
 @SET_MAKE@
 
+#ACLOCAL_AMFLAGS += ${ACLOCAL_FLAGS}
+
+# Library to feed  GiNaC code with parameters (code stolen from A. Sheplyakov)
+
+# library that stores all the calculation procedures for two-loop decoupling
+
+
+
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -34,17 +43,67 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = .
-DIST_COMMON = README $(am__configure_deps) $(dist_pkgdata_DATA) \
+bin_PROGRAMS = softsusy.x$(EXEEXT) softsusy-nmssm.x$(EXEEXT) \
+	softpoint.x$(EXEEXT) rpvsoftsusy.x$(EXEEXT) rpvneut.x$(EXEEXT)
+DIST_COMMON = README $(am__configure_deps) $(am__dist_data_DATA_DIST) \
+	$(am__dist_pkgdata_DATA_DIST) $(am__pkginclude_HEADERS_DIST) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk \
+	$(srcdir)/src/softsusy.amk \
+	$(srcdir)/src/two_loop_thresholds/mssmparam.amk \
+	$(srcdir)/src/two_loop_thresholds/two_loop_th.amk \
 	$(top_srcdir)/Config/config.h.in $(top_srcdir)/configure \
 	COPYING Config/config.guess Config/config.sub Config/depcomp \
 	Config/install-sh Config/ltmain.sh Config/missing INSTALL TODO
+@LOOPTOOLS_TRUE@am__append_1 = -looptools
+@LOOPTOOLS_TRUE@am__append_2 = -looptools
+@LOOPTOOLS_TRUE@am__append_3 = -looptools
+@LOOPTOOLS_TRUE@am__append_4 = -looptools
+@LOOPTOOLS_TRUE@am__append_5 = -looptools
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_6 = -I$(srcdir)/src
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_7 = libmssmparam.la \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	lib2lthresh.la
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_8 = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.cpp 
+
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_9 = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.cpp 
+
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_10 = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.cpp.in \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.cpp.in \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.cpp.in \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.cpp.in 
+
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_11 = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/dec_cor_helper.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/twoloopbubble.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.hpp 
+
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_12 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_13 = lib2lthresh.la libmssmparam.la 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_14 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_15 = lib2lthresh.la libmssmparam.la 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_16 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_17 = lib2lthresh.la libmssmparam.la 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_18 = lib2lthresh.la libmssmparam.la 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__append_19 = lib2lthresh.la libmssmparam.la 
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@am__append_20 = $(INPUTFILES) $(OUTPUTFILES) 
+subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
 	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/pkg.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -53,15 +112,6 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/Config/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-SOURCES =
-DIST_SOURCES =
-RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
-	html-recursive info-recursive install-data-recursive \
-	install-dvi-recursive install-exec-recursive \
-	install-html-recursive install-info-recursive \
-	install-pdf-recursive install-ps-recursive install-recursive \
-	installcheck-recursive installdirs-recursive pdf-recursive \
-	ps-recursive uninstall-recursive
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -89,16 +139,151 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(pkgdatadir)"
-DATA = $(dist_pkgdata_DATA)
-RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
-  distclean-recursive maintainer-clean-recursive
-AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
-	$(RECURSIVE_CLEAN_TARGETS:-recursive=) tags TAGS ctags CTAGS \
-	distdir dist dist-all distcheck
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
+	"$(DESTDIR)$(datadir)" "$(DESTDIR)$(pkgdatadir)" \
+	"$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgincludedir)"
+LTLIBRARIES = $(lib_LTLIBRARIES)
+lib2lthresh_la_LIBADD =
+am__lib2lthresh_la_SOURCES_DIST =  \
+	src/two_loop_thresholds/gs_corrections.hpp \
+	src/two_loop_thresholds/tquark_corrections.hpp \
+	src/two_loop_thresholds/bquark_corrections.hpp \
+	src/two_loop_thresholds/tau_corrections.hpp
+am_lib2lthresh_la_OBJECTS =
+am__dirstamp = $(am__leading_dot)dirstamp
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@nodist_lib2lthresh_la_OBJECTS = src/two_loop_thresholds/tau_corrections.lo \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	src/two_loop_thresholds/gs_corrections.lo \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	src/two_loop_thresholds/tquark_corrections.lo \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	src/two_loop_thresholds/bquark_corrections.lo
+lib2lthresh_la_OBJECTS = $(am_lib2lthresh_la_OBJECTS) \
+	$(nodist_lib2lthresh_la_OBJECTS)
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am_lib2lthresh_la_rpath = -rpath \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	$(libdir)
+libmssmparam_la_LIBADD =
+am__libmssmparam_la_SOURCES_DIST =  \
+	src/two_loop_thresholds/mssmparam.cpp \
+	src/two_loop_thresholds/mssmparam.hpp \
+	src/two_loop_thresholds/softsusy_exmap.hpp \
+	src/two_loop_thresholds/softsusy_exmap.cpp
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am_libmssmparam_la_OBJECTS = src/two_loop_thresholds/mssmparam.lo \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	src/two_loop_thresholds/softsusy_exmap.lo
+libmssmparam_la_OBJECTS = $(am_libmssmparam_la_OBJECTS)
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am_libmssmparam_la_rpath = -rpath \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	$(libdir)
+libsoft_la_LIBADD =
+am_libsoft_la_OBJECTS = src/def.lo src/linalg.lo src/lowe.lo \
+	src/numerics.lo src/rpvneut.lo src/physpars.lo src/rge.lo \
+	src/nmssm2loop.lo src/dilogwrap.lo src/nmssmsoftsusy.lo \
+	src/nmssmsusy.lo src/nmssmsoftpars.lo src/nmssmUtils.lo \
+	src/susy.lo src/utils.lo src/mssmUtils.lo src/tensor.lo \
+	src/rpvsusypars.lo src/rpvsoft.lo src/flavoursoft.lo \
+	src/twoloophiggs.lo
+libsoft_la_OBJECTS = $(am_libsoft_la_OBJECTS)
+libsoft_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(libsoft_la_LDFLAGS) $(LDFLAGS) -o $@
+PROGRAMS = $(bin_PROGRAMS)
+am_rpvneut_x_OBJECTS = src/rpvneutmain.$(OBJEXT)
+rpvneut_x_OBJECTS = $(am_rpvneut_x_OBJECTS)
+am__DEPENDENCIES_1 =
+rpvneut_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
+	$(am__append_19)
+am_rpvsoftsusy_x_OBJECTS = src/rpvmain.$(OBJEXT)
+rpvsoftsusy_x_OBJECTS = $(am_rpvsoftsusy_x_OBJECTS)
+rpvsoftsusy_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
+	$(am__append_18)
+am__softpoint_x_SOURCES_DIST = src/softpoint.cpp \
+	src/two_loop_thresholds/twoloopbubble.cpp
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@am__objects_1 = src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
+am_softpoint_x_OBJECTS = src/softpoint.$(OBJEXT) $(am__objects_1)
+softpoint_x_OBJECTS = $(am_softpoint_x_OBJECTS)
+softpoint_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
+	$(am__append_17)
+am__softsusy_nmssm_x_SOURCES_DIST = src/main-nmssm.cpp \
+	src/two_loop_thresholds/twoloopbubble.cpp
+am_softsusy_nmssm_x_OBJECTS = src/main-nmssm.$(OBJEXT) \
+	$(am__objects_1)
+softsusy_nmssm_x_OBJECTS = $(am_softsusy_nmssm_x_OBJECTS)
+softsusy_nmssm_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
+	$(am__append_15)
+am__softsusy_x_SOURCES_DIST = src/main.cpp \
+	src/two_loop_thresholds/twoloopbubble.cpp
+am_softsusy_x_OBJECTS = src/main.$(OBJEXT) $(am__objects_1)
+softsusy_x_OBJECTS = $(am_softsusy_x_OBJECTS)
+softsusy_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
+	$(am__append_13)
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/Config
+depcomp = $(SHELL) $(top_srcdir)/Config/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+F77COMPILE = $(F77) $(AM_FFLAGS) $(FFLAGS)
+LTF77COMPILE = $(LIBTOOL) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS)
+F77LD = $(F77)
+F77LINK = $(LIBTOOL) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(F77LD) $(AM_FFLAGS) $(FFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+SOURCES = $(lib2lthresh_la_SOURCES) $(nodist_lib2lthresh_la_SOURCES) \
+	$(libmssmparam_la_SOURCES) $(libsoft_la_SOURCES) \
+	$(rpvneut_x_SOURCES) $(rpvsoftsusy_x_SOURCES) \
+	$(softpoint_x_SOURCES) $(softsusy_nmssm_x_SOURCES) \
+	$(softsusy_x_SOURCES)
+DIST_SOURCES = $(am__lib2lthresh_la_SOURCES_DIST) \
+	$(am__libmssmparam_la_SOURCES_DIST) $(libsoft_la_SOURCES) \
+	$(rpvneut_x_SOURCES) $(rpvsoftsusy_x_SOURCES) \
+	$(am__softpoint_x_SOURCES_DIST) \
+	$(am__softsusy_nmssm_x_SOURCES_DIST) \
+	$(am__softsusy_x_SOURCES_DIST)
+am__dist_data_DATA_DIST = $(addprefix \
+	src/two_loop_thresholds/two_loop_archives/, \
+	bquark_2loop_strong_dec.gar bquark_2loop_yukawa_dec.gar \
+	bquark_2loop_yukawa_dec.tad.gar gs_twoloop_dec.gar \
+	tau_dec_2.gar tquark_2loop_strong_pole.gar)
+am__dist_pkgdata_DATA_DIST = inOutFiles/slha2Input \
+	inOutFiles/rpvHouchesInput inOutFiles/nmssmSLHAZ3Input \
+	inOutFiles/nmssmSLHAnoZ3Input inOutFiles/lesHouchesInput \
+	inOutFiles/slha2Output inOutFiles/lesHouchesOutput \
+	inOutFiles/rpvHouchesOutput inOutFiles/nmssmSLHAZ3Output \
+	inOutFiles/nmssmSLHAnoZ3Output inOutFiles/neutOutputTest \
+	inOutFiles/rpvOutputTest inOutFiles/outputTest \
+	inOutFiles/outputTest-nmssm softsusy_nmssmtools.x.in \
+	setup_nmssmtools.sh Makefile.nmssmtools CHANGES GUIDELINES \
+	COPYING
+DATA = $(dist_data_DATA) $(dist_pkgdata_DATA) $(doc_DATA)
+am__pkginclude_HEADERS_DIST =  \
+	src/two_loop_thresholds/dec_cor_helper.hpp \
+	src/two_loop_thresholds/twoloopbubble.hpp \
+	src/two_loop_thresholds/gs_corrections.hpp \
+	src/two_loop_thresholds/tquark_corrections.hpp \
+	src/two_loop_thresholds/bquark_corrections.hpp \
+	src/two_loop_thresholds/tau_corrections.hpp $(addprefix src/, \
+	def.h main.h numerics.h softpars.h softpars.cpp susy.h \
+	linalg.h physpars.h softpoint.h twoloophiggs.h nmssm2loop.h \
+	dilogwrap.h lowe.h mycomplex.h rge.h softsusy.h softsusy.cpp \
+	utils.h mssmUtils.h rpvsoft.h rpvsusypars.h tensor.h rpvmain.h \
+	flavoursoft.h xpr-base.h xpr-matrix.h xpr-vector.h rpvneut.h \
+	nmssmsusy.h nmssmsoftpars.h nmssmsoftsusy.h nmssmUtils.h)
+HEADERS = $(pkginclude_HEADERS)
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -108,31 +293,6 @@ am__remove_distdir = \
       && rm -rf "$(distdir)" \
       || { sleep 5 && rm -rf "$(distdir)"; }; \
   else :; fi
-am__relativize = \
-  dir0=`pwd`; \
-  sed_first='s,^\([^/]*\)/.*$$,\1,'; \
-  sed_rest='s,^[^/]*/*,,'; \
-  sed_last='s,^.*/\([^/]*\)$$,\1,'; \
-  sed_butlast='s,/*[^/]*$$,,'; \
-  while test -n "$$dir1"; do \
-    first=`echo "$$dir1" | sed -e "$$sed_first"`; \
-    if test "$$first" != "."; then \
-      if test "$$first" = ".."; then \
-        dir2=`echo "$$dir0" | sed -e "$$sed_last"`/"$$dir2"; \
-        dir0=`echo "$$dir0" | sed -e "$$sed_butlast"`; \
-      else \
-        first2=`echo "$$dir2" | sed -e "$$sed_first"`; \
-        if test "$$first2" = "$$first"; then \
-          dir2=`echo "$$dir2" | sed -e "$$sed_rest"`; \
-        else \
-          dir2="../$$dir2"; \
-        fi; \
-        dir0="$$dir0"/"$$first"; \
-      fi; \
-    fi; \
-    dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
-  done; \
-  reldir="$$dir2"
 DIST_ARCHIVES = $(distdir).tar.gz
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
@@ -149,8 +309,10 @@ AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CLN_CFLAGS = @CLN_CFLAGS@
+CLN_LIBS = @CLN_LIBS@
 CPP = @CPP@
-CPPFLAGS = @CPPFLAGS@
+CPPFLAGS = @CPPFLAGS@ $(am__append_6)
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -170,6 +332,8 @@ F77 = @F77@
 FFLAGS = @FFLAGS@
 FGREP = @FGREP@
 FLIBS = @FLIBS@
+GINAC_CFLAGS = @GINAC_CFLAGS@
+GINAC_LIBS = @GINAC_LIBS@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -201,6 +365,9 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -230,7 +397,7 @@ build_vendor = @build_vendor@
 builddir = @builddir@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docdir = @docdir@
+docdir = ${datadir}/doc/${PACKAGE}
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host = @host@
@@ -261,102 +428,118 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = src doc
+lib_LTLIBRARIES = libsoft.la $(am__append_7)
+CLEANFILES = $(am__append_9) $(OUTPUTFILES) *.x
+BUILT_SOURCES = $(am__append_8)
+EXTRA_DIST = $(am__append_10) src/nmspec.f \
+	src/two_loop_thresholds/bquark_corrections.cpp.in \
+	src/two_loop_thresholds/bquark_corrections.hpp \
+	src/two_loop_thresholds/gs_corrections.cpp.in \
+	src/two_loop_thresholds/gs_corrections.hpp \
+	src/two_loop_thresholds/tau_corrections.cpp.in \
+	src/two_loop_thresholds/tau_corrections.hpp \
+	src/two_loop_thresholds/tquark_corrections.cpp.in \
+	src/two_loop_thresholds/tquark_corrections.hpp doc/anc/*.eps \
+	doc/rpcManual.tex doc/rpvManual.tex doc/neutManual.tex \
+	doc/nmssmManual.tex doc/threeLoop.bib doc/tableTwo.tex \
+	doc/threeLoop.tex doc/tableOne.tex doc/axodraw.sty \
+	doc/jheppub.sty doc/elsarticle.cls doc/elsarticle-num.bst
+pkginclude_HEADERS = $(am__append_11) $(addprefix src/, def.h main.h \
+	numerics.h softpars.h softpars.cpp susy.h linalg.h physpars.h \
+	softpoint.h twoloophiggs.h nmssm2loop.h dilogwrap.h lowe.h \
+	mycomplex.h rge.h softsusy.h softsusy.cpp utils.h mssmUtils.h \
+	rpvsoft.h rpvsusypars.h tensor.h rpvmain.h flavoursoft.h \
+	xpr-base.h xpr-matrix.h xpr-vector.h rpvneut.h nmssmsusy.h \
+	nmssmsoftpars.h nmssmsoftsusy.h nmssmUtils.h)
+dist_pkgdata_DATA = $(am__append_20) softsusy_nmssmtools.x.in \
+	setup_nmssmtools.sh Makefile.nmssmtools CHANGES GUIDELINES \
+	COPYING $(DOCFILES)
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
-TESTOUTPUT = inOutFiles/slha2Output inOutFiles/lesHouchesOutput inOutFiles/rpvHouchesOutput \
- inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output
+AUTOMAKE_OPTIONS = subdir-objects
+softsusy_x_SOURCES = src/main.cpp $(am__append_12)
+softsusy_x_LDADD = libsoft.la $(am__append_1) $(am__append_13)
+softsusy_nmssm_x_SOURCES = src/main-nmssm.cpp $(am__append_14)
+softsusy_nmssm_x_LDADD = libsoft.la $(am__append_2) $(am__append_15)
+softpoint_x_SOURCES = src/softpoint.cpp $(am__append_16)
+softpoint_x_LDADD = libsoft.la $(am__append_3) $(am__append_17)
+rpvsoftsusy_x_SOURCES = src/rpvmain.cpp 
+rpvsoftsusy_x_LDADD = libsoft.la $(am__append_4) $(am__append_18)
+rpvneut_x_SOURCES = src/rpvneutmain.cpp 
+rpvneut_x_LDADD = libsoft.la $(am__append_5) $(am__append_19)
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@libmssmparam_la_SOURCES = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/mssmparam.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/mssmparam.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/softsusy_exmap.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/softsusy_exmap.cpp 
 
-OUTPUTFILES = $(TESTOUTPUT) \
- inOutFiles/neutOutputTest inOutFiles/rpvOutputTest \
- inOutFiles/outputTest inOutFiles/outputTest-nmssm \
-benchmarks/cmssm10.1.1.spec benchmarks/cmssm10.1.2.spec \
-benchmarks/cmssm10.1.3.spec benchmarks/cmssm10.1.4.spec \
-benchmarks/cmssm10.1.5.spec \
-benchmarks/cmssm10.2.1.spec benchmarks/cmssm10.2.2.spec \
-benchmarks/cmssm10.2.3.spec benchmarks/cmssm10.2.4.spec \
-benchmarks/cmssm10.2.5.spec \
-benchmarks/cmssm10.3.1.spec benchmarks/cmssm10.3.2.spec \
-benchmarks/cmssm10.3.3.spec benchmarks/cmssm10.3.4.spec \
-benchmarks/cmssm10.3.5.spec \
-benchmarks/cmssm10.4.1.spec benchmarks/cmssm10.4.2.spec \
-benchmarks/cmssm10.4.3.spec benchmarks/cmssm10.4.4.spec \
-benchmarks/cmssm10.4.5.spec \
-benchmarks/cmssm40.1.1.spec benchmarks/cmssm40.1.2.spec \
-benchmarks/cmssm40.1.3.spec benchmarks/cmssm40.1.4.spec \
-benchmarks/cmssm40.1.5.spec \
-benchmarks/cmssm40.2.1.spec benchmarks/cmssm40.2.2.spec \
-benchmarks/cmssm40.2.3.spec benchmarks/cmssm40.2.4.spec \
-benchmarks/cmssm40.2.5.spec \
-benchmarks/cmssm40.3.1.spec benchmarks/cmssm40.3.2.spec \
-benchmarks/cmssm40.3.3.spec benchmarks/cmssm40.3.4.spec \
-benchmarks/cmssm40.3.5.spec \
-benchmarks/mamsb1.1.spec benchmarks/mamsb1.2.spec benchmarks/mamsb1.3.spec \
-benchmarks/mgmsb1.1.spec benchmarks/mgmsb1.2.spec benchmarks/mgmsb1.3.spec \
-benchmarks/mgmsb1.4.spec benchmarks/mgmsb1.5.spec benchmarks/mgmsb1.6.spec \
-benchmarks/mgmsb2.1.1.spec benchmarks/mgmsb2.1.2.spec benchmarks/mgmsb2.1.3.spec \
-benchmarks/mgmsb2.1.4.spec benchmarks/mgmsb2.1.5.spec benchmarks/mgmsb2.1.6.spec \
-benchmarks/mgmsb2.2.1.spec benchmarks/mgmsb2.2.2.spec benchmarks/mgmsb2.2.3.spec \
-benchmarks/mgmsb2.2.4.spec benchmarks/mgmsb2.2.5.spec benchmarks/mgmsb2.2.6.spec \
-benchmarks/pmssm1.1.spec benchmarks/pmssm1.2.spec benchmarks/pmssm1.3.spec \
-benchmarks/pmssm1.4.spec benchmarks/pmssm1.5.spec benchmarks/pmssm1.6.spec \
-benchmarks/pmssm2.1.spec benchmarks/pmssm2.2.spec benchmarks/pmssm2.3.spec \
-benchmarks/pmssm2.4.spec benchmarks/pmssm2.5.spec benchmarks/pmssm2.6.spec \
-benchmarks/rpv1.1.spec benchmarks/rpv1.2.spec benchmarks/rpv1.3.spec \
-benchmarks/rpv1.4.spec benchmarks/rpv1.5.spec \
-benchmarks/rpv2.1.spec benchmarks/rpv2.2.spec benchmarks/rpv2.3.spec \
-benchmarks/rpv2.4.spec benchmarks/rpv2.5.spec \
-benchmarks/rpv3.1.spec benchmarks/rpv3.2.spec benchmarks/rpv3.3.spec \
-benchmarks/rpv3.4.spec benchmarks/rpv3.5.spec 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@lib2lthresh_la_SOURCES = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.hpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.hpp 
 
-INPUTFILES = inOutFiles/slha2Input inOutFiles/lesHouchesInput inOutFiles/rpvHouchesInput \
-inOutFiles/nmssmSLHAZ3Input inOutFiles/nmssmSLHAnoZ3Input \
-benchmarks/cmssm10.1.1.in benchmarks/cmssm10.1.2.in \
-benchmarks/cmssm10.1.3.in benchmarks/cmssm10.1.4.in \
-benchmarks/cmssm10.1.5.in \
-benchmarks/cmssm10.2.1.in benchmarks/cmssm10.2.2.in \
-benchmarks/cmssm10.2.3.in benchmarks/cmssm10.2.4.in \
-benchmarks/cmssm10.2.5.in \
-benchmarks/cmssm10.3.1.in benchmarks/cmssm10.3.2.in \
-benchmarks/cmssm10.3.3.in benchmarks/cmssm10.3.4.in \
-benchmarks/cmssm10.3.5.in \
-benchmarks/cmssm10.4.1.in benchmarks/cmssm10.4.2.in \
-benchmarks/cmssm10.4.3.in benchmarks/cmssm10.4.4.in \
-benchmarks/cmssm10.4.5.in \
-benchmarks/cmssm40.1.1.in benchmarks/cmssm40.1.2.in \
-benchmarks/cmssm40.1.3.in benchmarks/cmssm40.1.4.in \
-benchmarks/cmssm40.1.5.in \
-benchmarks/cmssm40.2.1.in benchmarks/cmssm40.2.2.in \
-benchmarks/cmssm40.2.3.in benchmarks/cmssm40.2.4.in \
-benchmarks/cmssm40.2.5.in \
-benchmarks/cmssm40.3.1.in benchmarks/cmssm40.3.2.in \
-benchmarks/cmssm40.3.3.in benchmarks/cmssm40.3.4.in \
-benchmarks/cmssm40.3.5.in \
-benchmarks/mamsb1.1.in benchmarks/mamsb1.2.in benchmarks/mamsb1.3.in \
-benchmarks/mgmsb1.1.in benchmarks/mgmsb1.2.in benchmarks/mgmsb1.3.in \
-benchmarks/mgmsb1.4.in benchmarks/mgmsb1.5.in benchmarks/mgmsb1.6.in \
-benchmarks/mgmsb2.1.1.in benchmarks/mgmsb2.1.2.in benchmarks/mgmsb2.1.3.in \
-benchmarks/mgmsb2.1.4.in benchmarks/mgmsb2.1.5.in benchmarks/mgmsb2.1.6.in \
-benchmarks/mgmsb2.2.1.in benchmarks/mgmsb2.2.2.in benchmarks/mgmsb2.2.3.in \
-benchmarks/mgmsb2.2.4.in benchmarks/mgmsb2.2.5.in benchmarks/mgmsb2.2.6.in \
-benchmarks/pmssm1.1.in benchmarks/pmssm1.2.in benchmarks/pmssm1.3.in \
-benchmarks/pmssm1.4.in benchmarks/pmssm1.5.in benchmarks/pmssm1.6.in \
-benchmarks/pmssm2.1.in benchmarks/pmssm2.2.in benchmarks/pmssm2.3.in \
-benchmarks/pmssm2.4.in benchmarks/pmssm2.5.in benchmarks/pmssm2.6.in \
-benchmarks/rpv1.1.in benchmarks/rpv1.2.in benchmarks/rpv1.3.in \
-benchmarks/rpv1.4.in benchmarks/rpv1.5.in \
-benchmarks/rpv2.1.in benchmarks/rpv2.2.in benchmarks/rpv2.3.in \
-benchmarks/rpv2.4.in benchmarks/rpv2.5.in \
-benchmarks/rpv3.1.in benchmarks/rpv3.2.in benchmarks/rpv3.3.in \
-benchmarks/rpv3.4.in benchmarks/rpv3.5.in 
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@nodist_lib2lthresh_la_SOURCES = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tau_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/gs_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/tquark_corrections.cpp \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@src/two_loop_thresholds/bquark_corrections.cpp 
 
-dist_pkgdata_DATA = softsusy_nmssmtools.x.in setup_nmssmtools.sh Makefile.nmssmtools $(INPUTFILES) $(OUTPUTFILES) CHANGES GUIDELINES COPYING $(DOCFILES)
-CLEANFILES = $(OUTPUTFILES) *.x
-all: all-recursive
+
+# data will be stored here
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@th_datadir = $(abs_builddir)/src/two_loop_thresholds/two_loop_archives
+
+# data is located here 
+#th_data_DATA = \
+#$(addprefix src/two_loop_thresholds/two_loop_archives/, \
+#bquark_2loop_strong_dec.gar \
+#bquark_2loop_yukawa_dec.gar \
+#bquark_2loop_yukawa_dec.tad.gar \
+#gs_twoloop_dec.gar \
+#tau_dec_2.gar \
+#tquark_2loop_strong_pole.gar)
+
+# distribute data
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@dist_data_DATA = \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@$(addprefix src/two_loop_thresholds/two_loop_archives/, \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@bquark_2loop_strong_dec.gar \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@bquark_2loop_yukawa_dec.gar \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@bquark_2loop_yukawa_dec.tad.gar \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@gs_twoloop_dec.gar \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@tau_dec_2.gar \
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@tquark_2loop_strong_pole.gar)
+
+libsoft_la_SOURCES = \
+src/def.cpp src/linalg.cpp src/lowe.cpp src/numerics.cpp  src/rpvneut.cpp \
+src/physpars.cpp src/rge.cpp src/nmssm2loop.f src/dilogwrap.f \
+ src/nmssmsoftsusy.cpp src/nmssmsusy.cpp src/nmssmsoftpars.cpp src/nmssmUtils.cpp \
+src/susy.cpp src/utils.cpp src/mssmUtils.cpp \
+src/tensor.cpp src/rpvsusypars.cpp src/rpvsoft.cpp src/flavoursoft.cpp src/twoloophiggs.f
+
+libsoft_la_LDFLAGS = @FLIBS@
+doc_DATA = doc/rpcManual.pdf \
+           doc/rpvManual.pdf \
+           doc/neutManual.pdf \
+	   doc/nmssmManual.pdf \
+	   doc/threeLoop.pdf
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@TESTOUTPUT = inOutFiles/slha2Output inOutFiles/lesHouchesOutput inOutFiles/rpvHouchesOutput \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output inOutFiles/lesHouchesOutput
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@INPUTFILES = inOutFiles/slha2Input inOutFiles/rpvHouchesInput \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/nmssmSLHAZ3Input inOutFiles/nmssmSLHAnoZ3Input \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/lesHouchesInput 
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@OUTPUTFILES = $(TESTOUTPUT) inOutFiles/neutOutputTest inOutFiles/rpvOutputTest \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/outputTest inOutFiles/outputTest-nmssm
+
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
+.SUFFIXES: .cpp .f .lo .o .obj
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -379,6 +562,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
+$(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -403,15 +587,325 @@ $(top_srcdir)/Config/config.h.in:  $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f Config/config.h Config/stamp-h1
+install-libLTLIBRARIES: $(lib_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	test -z "$(libdir)" || $(MKDIR_P) "$(DESTDIR)$(libdir)"
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
+	}
+
+uninstall-libLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
+	done
+
+clean-libLTLIBRARIES:
+	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+src/two_loop_thresholds/$(am__dirstamp):
+	@$(MKDIR_P) src/two_loop_thresholds
+	@: > src/two_loop_thresholds/$(am__dirstamp)
+src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/two_loop_thresholds/$(DEPDIR)
+	@: > src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/tau_corrections.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/gs_corrections.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/tquark_corrections.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/bquark_corrections.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+lib2lthresh.la: $(lib2lthresh_la_OBJECTS) $(lib2lthresh_la_DEPENDENCIES) $(EXTRA_lib2lthresh_la_DEPENDENCIES) 
+	$(CXXLINK) $(am_lib2lthresh_la_rpath) $(lib2lthresh_la_OBJECTS) $(lib2lthresh_la_LIBADD) $(LIBS)
+src/two_loop_thresholds/mssmparam.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/softsusy_exmap.lo:  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+libmssmparam.la: $(libmssmparam_la_OBJECTS) $(libmssmparam_la_DEPENDENCIES) $(EXTRA_libmssmparam_la_DEPENDENCIES) 
+	$(CXXLINK) $(am_libmssmparam_la_rpath) $(libmssmparam_la_OBJECTS) $(libmssmparam_la_LIBADD) $(LIBS)
+src/$(am__dirstamp):
+	@$(MKDIR_P) src
+	@: > src/$(am__dirstamp)
+src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/$(DEPDIR)
+	@: > src/$(DEPDIR)/$(am__dirstamp)
+src/def.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/linalg.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/lowe.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/numerics.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/rpvneut.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/physpars.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/rge.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/nmssm2loop.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/dilogwrap.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/nmssmsoftsusy.lo: src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/nmssmsusy.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/nmssmsoftpars.lo: src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/nmssmUtils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/susy.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/utils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/mssmUtils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/tensor.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/rpvsusypars.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/rpvsoft.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/flavoursoft.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/twoloophiggs.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+libsoft.la: $(libsoft_la_OBJECTS) $(libsoft_la_DEPENDENCIES) $(EXTRA_libsoft_la_DEPENDENCIES) 
+	$(libsoft_la_LINK) -rpath $(libdir) $(libsoft_la_OBJECTS) $(libsoft_la_LIBADD) $(LIBS)
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	for p in $$list; do echo "$$p $$p"; done | \
+	sed 's/$(EXEEXT)$$//' | \
+	while read p p1; do if test -f $$p || test -f $$p1; \
+	  then echo "$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n;h' -e 's|.*|.|' \
+	    -e 'p;x;s,.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/' | \
+	sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1 } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) files[d] = files[d] " " $$1; \
+	    else { print "f", $$3 "/" $$4, $$1; } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	    if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	    test -z "$$files" || { \
+	    echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL_PROGRAM) $$files '$(DESTDIR)$(bindir)$$dir'"; \
+	    $(INSTALL_PROGRAM_ENV) $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL_PROGRAM) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
+	    } \
+	; done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	  sed -e 'h;s,^.*/,,;s/$(EXEEXT)$$//;$(transform)' \
+	      -e 's/$$/$(EXEEXT)/' `; \
+	test -n "$$list" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(bindir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(bindir)" && rm -f $$files
+
+clean-binPROGRAMS:
+	@list='$(bin_PROGRAMS)'; test -n "$$list" || exit 0; \
+	echo " rm -f" $$list; \
+	rm -f $$list || exit $$?; \
+	test -n "$(EXEEXT)" || exit 0; \
+	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+	echo " rm -f" $$list; \
+	rm -f $$list
+src/rpvneutmain.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+rpvneut.x$(EXEEXT): $(rpvneut_x_OBJECTS) $(rpvneut_x_DEPENDENCIES) $(EXTRA_rpvneut_x_DEPENDENCIES) 
+	@rm -f rpvneut.x$(EXEEXT)
+	$(CXXLINK) $(rpvneut_x_OBJECTS) $(rpvneut_x_LDADD) $(LIBS)
+src/rpvmain.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+rpvsoftsusy.x$(EXEEXT): $(rpvsoftsusy_x_OBJECTS) $(rpvsoftsusy_x_DEPENDENCIES) $(EXTRA_rpvsoftsusy_x_DEPENDENCIES) 
+	@rm -f rpvsoftsusy.x$(EXEEXT)
+	$(CXXLINK) $(rpvsoftsusy_x_OBJECTS) $(rpvsoftsusy_x_LDADD) $(LIBS)
+src/softpoint.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/two_loop_thresholds/twoloopbubble.$(OBJEXT):  \
+	src/two_loop_thresholds/$(am__dirstamp) \
+	src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+softpoint.x$(EXEEXT): $(softpoint_x_OBJECTS) $(softpoint_x_DEPENDENCIES) $(EXTRA_softpoint_x_DEPENDENCIES) 
+	@rm -f softpoint.x$(EXEEXT)
+	$(CXXLINK) $(softpoint_x_OBJECTS) $(softpoint_x_LDADD) $(LIBS)
+src/main-nmssm.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+softsusy-nmssm.x$(EXEEXT): $(softsusy_nmssm_x_OBJECTS) $(softsusy_nmssm_x_DEPENDENCIES) $(EXTRA_softsusy_nmssm_x_DEPENDENCIES) 
+	@rm -f softsusy-nmssm.x$(EXEEXT)
+	$(CXXLINK) $(softsusy_nmssm_x_OBJECTS) $(softsusy_nmssm_x_LDADD) $(LIBS)
+src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+softsusy.x$(EXEEXT): $(softsusy_x_OBJECTS) $(softsusy_x_DEPENDENCIES) $(EXTRA_softsusy_x_DEPENDENCIES) 
+	@rm -f softsusy.x$(EXEEXT)
+	$(CXXLINK) $(softsusy_x_OBJECTS) $(softsusy_x_LDADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+	-rm -f src/def.$(OBJEXT)
+	-rm -f src/def.lo
+	-rm -f src/dilogwrap.$(OBJEXT)
+	-rm -f src/dilogwrap.lo
+	-rm -f src/flavoursoft.$(OBJEXT)
+	-rm -f src/flavoursoft.lo
+	-rm -f src/linalg.$(OBJEXT)
+	-rm -f src/linalg.lo
+	-rm -f src/lowe.$(OBJEXT)
+	-rm -f src/lowe.lo
+	-rm -f src/main-nmssm.$(OBJEXT)
+	-rm -f src/main.$(OBJEXT)
+	-rm -f src/mssmUtils.$(OBJEXT)
+	-rm -f src/mssmUtils.lo
+	-rm -f src/nmssm2loop.$(OBJEXT)
+	-rm -f src/nmssm2loop.lo
+	-rm -f src/nmssmUtils.$(OBJEXT)
+	-rm -f src/nmssmUtils.lo
+	-rm -f src/nmssmsoftpars.$(OBJEXT)
+	-rm -f src/nmssmsoftpars.lo
+	-rm -f src/nmssmsoftsusy.$(OBJEXT)
+	-rm -f src/nmssmsoftsusy.lo
+	-rm -f src/nmssmsusy.$(OBJEXT)
+	-rm -f src/nmssmsusy.lo
+	-rm -f src/numerics.$(OBJEXT)
+	-rm -f src/numerics.lo
+	-rm -f src/physpars.$(OBJEXT)
+	-rm -f src/physpars.lo
+	-rm -f src/rge.$(OBJEXT)
+	-rm -f src/rge.lo
+	-rm -f src/rpvmain.$(OBJEXT)
+	-rm -f src/rpvneut.$(OBJEXT)
+	-rm -f src/rpvneut.lo
+	-rm -f src/rpvneutmain.$(OBJEXT)
+	-rm -f src/rpvsoft.$(OBJEXT)
+	-rm -f src/rpvsoft.lo
+	-rm -f src/rpvsusypars.$(OBJEXT)
+	-rm -f src/rpvsusypars.lo
+	-rm -f src/softpoint.$(OBJEXT)
+	-rm -f src/susy.$(OBJEXT)
+	-rm -f src/susy.lo
+	-rm -f src/tensor.$(OBJEXT)
+	-rm -f src/tensor.lo
+	-rm -f src/two_loop_thresholds/bquark_corrections.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/bquark_corrections.lo
+	-rm -f src/two_loop_thresholds/gs_corrections.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/gs_corrections.lo
+	-rm -f src/two_loop_thresholds/mssmparam.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/mssmparam.lo
+	-rm -f src/two_loop_thresholds/softsusy_exmap.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/softsusy_exmap.lo
+	-rm -f src/two_loop_thresholds/tau_corrections.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/tau_corrections.lo
+	-rm -f src/two_loop_thresholds/tquark_corrections.$(OBJEXT)
+	-rm -f src/two_loop_thresholds/tquark_corrections.lo
+	-rm -f src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
+	-rm -f src/twoloophiggs.$(OBJEXT)
+	-rm -f src/twoloophiggs.lo
+	-rm -f src/utils.$(OBJEXT)
+	-rm -f src/utils.lo
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/def.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/flavoursoft.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/linalg.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/lowe.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main-nmssm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/mssmUtils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nmssmUtils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nmssmsoftpars.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nmssmsoftsusy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/nmssmsusy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/numerics.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/physpars.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rge.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvmain.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvneut.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvneutmain.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsoft.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsusypars.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softpoint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/susy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tensor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/utils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/bquark_corrections.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/gs_corrections.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/mssmparam.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/softsusy_exmap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/tau_corrections.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/tquark_corrections.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/two_loop_thresholds/$(DEPDIR)/twoloopbubble.Po@am__quote@
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
+@am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCXX_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+.f.o:
+	$(F77COMPILE) -c -o $@ $<
+
+.f.obj:
+	$(F77COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.f.lo:
+	$(LTF77COMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf src/.libs src/_libs
+	-rm -rf src/two_loop_thresholds/.libs src/two_loop_thresholds/_libs
 
 distclean-libtool:
 	-rm -f libtool config.lt
+install-dist_dataDATA: $(dist_data_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(datadir)" || $(MKDIR_P) "$(DESTDIR)$(datadir)"
+	@list='$(dist_data_DATA)'; test -n "$(datadir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(datadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(datadir)" || exit $$?; \
+	done
+
+uninstall-dist_dataDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_data_DATA)'; test -n "$(datadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(datadir)'; $(am__uninstall_files_from_dir)
 install-dist_pkgdataDATA: $(dist_pkgdata_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(pkgdatadir)" || $(MKDIR_P) "$(DESTDIR)$(pkgdatadir)"
@@ -430,76 +924,42 @@ uninstall-dist_pkgdataDATA:
 	@list='$(dist_pkgdata_DATA)'; test -n "$(pkgdatadir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(pkgdatadir)'; $(am__uninstall_files_from_dir)
-
-# This directory's subdirectories are mostly independent; you can cd
-# into them and run `make' without going through this Makefile.
-# To change the values of `make' variables: instead of editing Makefiles,
-# (1) if the variable is set in `config.status', edit `config.status'
-#     (which will cause the Makefiles to be regenerated when you run `make');
-# (2) otherwise, pass the desired values on the `make' command line.
-$(RECURSIVE_TARGETS):
-	@fail= failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	target=`echo $@ | sed s/-recursive//`; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    dot_seen=yes; \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done; \
-	if test "$$dot_seen" = "no"; then \
-	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
-	fi; test -z "$$fail"
-
-$(RECURSIVE_CLEAN_TARGETS):
-	@fail= failcom='exit 1'; \
-	for f in x $$MAKEFLAGS; do \
-	  case $$f in \
-	    *=* | --[!k]*);; \
-	    *k*) failcom='fail=yes';; \
-	  esac; \
-	done; \
-	dot_seen=no; \
-	case "$@" in \
-	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
-	  *) list='$(SUBDIRS)' ;; \
-	esac; \
-	rev=''; for subdir in $$list; do \
-	  if test "$$subdir" = "."; then :; else \
-	    rev="$$subdir $$rev"; \
-	  fi; \
-	done; \
-	rev="$$rev ."; \
-	target=`echo $@ | sed s/-recursive//`; \
-	for subdir in $$rev; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	  || eval $$failcom; \
-	done && test -z "$$fail"
-tags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
+install-docDATA: $(doc_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(docdir)" || $(MKDIR_P) "$(DESTDIR)$(docdir)"
+	@list='$(doc_DATA)'; test -n "$(docdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(docdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(docdir)" || exit $$?; \
 	done
-ctags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || ($(am__cd) $$subdir && $(MAKE) $(AM_MAKEFLAGS) ctags); \
+
+uninstall-docDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(doc_DATA)'; test -n "$(docdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(docdir)'; $(am__uninstall_files_from_dir)
+install-pkgincludeHEADERS: $(pkginclude_HEADERS)
+	@$(NORMAL_INSTALL)
+	test -z "$(pkgincludedir)" || $(MKDIR_P) "$(DESTDIR)$(pkgincludedir)"
+	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(pkgincludedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(pkgincludedir)" || exit $$?; \
 	done
+
+uninstall-pkgincludeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(pkgincludedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -511,23 +971,10 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	mkid -fID $$unique
 tags: TAGS
 
-TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	set x; \
 	here=`pwd`; \
-	if ($(ETAGS) --etags-include --version) >/dev/null 2>&1; then \
-	  include_option=--etags-include; \
-	  empty_fix=.; \
-	else \
-	  include_option=--include; \
-	  empty_fix=; \
-	fi; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test ! -f $$subdir/TAGS || \
-	      set "$$@" "$$include_option=$$here/$$subdir/TAGS"; \
-	  fi; \
-	done; \
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
@@ -546,7 +993,7 @@ TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 	  fi; \
 	fi
 ctags: CTAGS
-CTAGS: ctags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
@@ -596,34 +1043,6 @@ distdir: $(DISTFILES)
 	    test -f "$(distdir)/$$file" \
 	    || cp -p $$d/$$file "$(distdir)/$$file" \
 	    || exit 1; \
-	  fi; \
-	done
-	@list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    test -d "$(distdir)/$$subdir" \
-	    || $(MKDIR_P) "$(distdir)/$$subdir" \
-	    || exit 1; \
-	  fi; \
-	done
-	@list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
-	  if test "$$subdir" = .; then :; else \
-	    dir1=$$subdir; dir2="$(distdir)/$$subdir"; \
-	    $(am__relativize); \
-	    new_distdir=$$reldir; \
-	    dir1=$$subdir; dir2="$(top_distdir)"; \
-	    $(am__relativize); \
-	    new_top_distdir=$$reldir; \
-	    echo " (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) top_distdir="$$new_top_distdir" distdir="$$new_distdir" \\"; \
-	    echo "     am__remove_distdir=: am__skip_length_check=: am__skip_mode_fix=: distdir)"; \
-	    ($(am__cd) $$subdir && \
-	      $(MAKE) $(AM_MAKEFLAGS) \
-	        top_distdir="$$new_top_distdir" \
-	        distdir="$$new_distdir" \
-		am__remove_distdir=: \
-		am__skip_length_check=: \
-		am__skip_mode_fix=: \
-	        distdir) \
-	      || exit 1; \
 	  fi; \
 	done
 	-test -n "$(am__skip_mode_fix)" \
@@ -757,22 +1176,25 @@ distcleancheck: distclean
 	       $(distcleancheck_listfiles) ; \
 	       exit 1; } >&2
 check-am: all-am
-check: check-recursive
-all-am: Makefile $(DATA)
-installdirs: installdirs-recursive
-installdirs-am:
-	for dir in "$(DESTDIR)$(pkgdatadir)"; do \
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA) $(HEADERS)
+install-binPROGRAMS: install-libLTLIBRARIES
+
+installdirs:
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(datadir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(docdir)" "$(DESTDIR)$(pkgincludedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-recursive
-install-exec: install-exec-recursive
-install-data: install-data-recursive
-uninstall: uninstall-recursive
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
-installcheck: installcheck-recursive
+installcheck: installcheck-am
 install-strip:
 	if test -z '$(STRIP)'; then \
 	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
@@ -791,135 +1213,170 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/$(am__dirstamp)
+	-rm -f src/two_loop_thresholds/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/two_loop_thresholds/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-clean: clean-recursive
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+clean: clean-am
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
+	clean-libtool clean-local mostlyclean-am
 
-distclean: distclean-recursive
+distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+	-rm -rf src/$(DEPDIR) src/two_loop_thresholds/$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-hdr \
-	distclean-libtool distclean-tags
+distclean-am: clean-am distclean-compile distclean-generic \
+	distclean-hdr distclean-libtool distclean-local distclean-tags
 
-dvi: dvi-recursive
+dvi: dvi-am
 
 dvi-am:
 
-html: html-recursive
+html: html-am
 
 html-am:
 
-info: info-recursive
+info: info-am
 
 info-am:
 
-install-data-am: install-dist_pkgdataDATA
+install-data-am: install-data-local install-dist_dataDATA \
+	install-dist_pkgdataDATA install-docDATA \
+	install-pkgincludeHEADERS
 
-install-dvi: install-dvi-recursive
+install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am:
+install-exec-am: install-binPROGRAMS install-libLTLIBRARIES
 
-install-html: install-html-recursive
+install-html: install-html-am
 
 install-html-am:
 
-install-info: install-info-recursive
+install-info: install-info-am
 
 install-info-am:
 
 install-man:
 
-install-pdf: install-pdf-recursive
+install-pdf: install-pdf-am
 
 install-pdf-am:
 
-install-ps: install-ps-recursive
+install-ps: install-ps-am
 
 install-ps-am:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-recursive
+maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
+	-rm -rf src/$(DEPDIR) src/two_loop_thresholds/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
-mostlyclean: mostlyclean-recursive
+mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
-pdf: pdf-recursive
+pdf: pdf-am
 
 pdf-am:
 
-ps: ps-recursive
+ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-dist_pkgdataDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-dist_dataDATA \
+	uninstall-dist_pkgdataDATA uninstall-docDATA \
+	uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS
 
-.MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
-	install-am install-strip tags-recursive
+.MAKE: all check install install-am install-strip
 
-.PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
-	all all-am am--refresh check check-am clean clean-generic \
-	clean-libtool ctags ctags-recursive dist dist-all dist-bzip2 \
+.PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
+	clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
+	clean-libtool clean-local ctags dist dist-all dist-bzip2 \
 	dist-gzip dist-lzip dist-lzma dist-shar dist-tarZ dist-xz \
-	dist-zip distcheck distclean distclean-generic distclean-hdr \
-	distclean-libtool distclean-tags distcleancheck distdir \
+	dist-zip distcheck distclean distclean-compile \
+	distclean-generic distclean-hdr distclean-libtool \
+	distclean-local distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am \
-	install-dist_pkgdataDATA install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
+	install install-am install-binPROGRAMS install-data \
+	install-data-am install-data-local install-dist_dataDATA \
+	install-dist_pkgdataDATA install-docDATA install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-pkgincludeHEADERS install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
 	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-dist_pkgdataDATA
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-dist_dataDATA \
+	uninstall-dist_pkgdataDATA uninstall-docDATA \
+	uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS
 
 
-inOutFiles/%Output : inOutFiles/%Input softpoint.x 
-	./softpoint.x leshouches < $< > $@
+#  
 
-inOutFiles/outputTest: softsusy.x
-	./softsusy.x > inOutFiles/outputTest
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@%.cpp : %.cpp.in
+@COMPILE_FULL_SUSY_THRESHOLD_TRUE@	sed -e 's,\@th_datadir\@,$(th_datadir),g' $< > $@
 
-inOutFiles/outputTest-nmssm: softsusy-nmssm.x
-	./softsusy-nmssm.x > inOutFiles/outputTest-nmssm
+doc: $(doc_DATA)
 
-inOutFiles/rpvOutputTest: rpvsoftsusy.x
-	./rpvsoftsusy.x > inOutFiles/rpvOutputTest
+doc/threeLoop.tex: doc/tableOne.tex doc/tableTwo.tex doc/threeLoop.bib
 
-inOutFiles/neutOutputTest: rpvneut.x
-	./rpvneut.x > inOutFiles/neutOutputTest
+doc/%.pdf: doc/%.tex
+	cd $(top_builddir)/doc;\
+	latex $(*F).tex ; bibtex $(*F); latex $(*F).tex; latex $(*F).tex ;\
+	dvips -f $(*F) > $(*F).ps ;\
+	ps2pdf $(*F).ps
 
-benchmarks/%.spec: benchmarks/%.in softpoint.x
-	$(install_sh) -d benchmarks
-	./softpoint.x leshouches < $< > $@
+clean-local:
+	-rm -f doc/*.log doc/*.spl doc/*.aux doc/*.dvi doc/*.ps doc/*.toc doc/*.out doc/*.pdf
 
-.PHONY: $(SUBDIRS) test updateWeb
+distclean-local: clean-local
+	-rm -f $(doc_DATA)
 
-test: softpoint.x
-	git checkout $(TESTOUTPUT)
-	cp $(TESTOUTPUT) .test; rm $(TESTOUTPUT); make $(TESTOUTPUT); \
-	ndiff --relative-error 1.0e-3 inOutFiles/slha2Output .test/slha2Output; \
-	ndiff --relative-error 1.0e-3 inOutFiles/lesHouchesOutput .test/lesHouchesOutput; \
-	ndiff --relative-error 1.0e-3 inOutFiles/rpvHouchesOutput .test/rpvHouchesOutput; \
-	ndiff --relative-error 1.0e-3 inOutFiles/nmssmSLHAZ3Output .test/nmssmSLHAZ3Output; \
-	ndiff --relative-error 1.0e-3 inOutFiles/nmssmSLHAnoZ3Output .test/nmssmSLHAnoZ3Output
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/%Output : inOutFiles/%Input softpoint.x 
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	./softpoint.x leshouches < $< > $@
 
-doc:
-	@echo Making $@ in $(top_builddir)/doc
-	cd $(top_builddir)/doc && make $@
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/outputTest: softsusy.x
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	./softsusy.x > inOutFiles/outputTest
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/outputTest-nmssm: softsusy-nmssm.x
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	./softsusy-nmssm.x > inOutFiles/outputTest-nmssm
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/rpvOutputTest: rpvsoftsusy.x
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	./rpvsoftsusy.x > inOutFiles/rpvOutputTest
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/neutOutputTest: rpvneut.x
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	./rpvneut.x > inOutFiles/neutOutputTest
+
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@test:   softpoint.x
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	git checkout $(TESTOUTPUT)
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	cp $(TESTOUTPUT) .test; rm $(TESTOUTPUT); make $(TESTOUTPUT); \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	ndiff --relative-error 1.0e-3 inOutFiles/lesHouchesOutput .test/lesHouchesOutput; 
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	ndiff --relative-error 1.0e-3 inOutFiles/slha2Output .test/slha2Output; \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	ndiff --relative-error 1.0e-3 inOutFiles/rpvHouchesOutput .test/rpvHouchesOutput; \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	ndiff --relative-error 1.0e-3 inOutFiles/nmssmSLHAZ3Output .test/nmssmSLHAZ3Output; \
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@	ndiff --relative-error 1.0e-3 inOutFiles/nmssmSLHAnoZ3Output .test/nmssmSLHAnoZ3Output
+
+.PHONY: doc test updateWeb install
 
 updateWeb: dist 
 	scp softsusy-${VERSION}.tar.gz allanach@login.hepforge.org:~/softsusy/downloads; 
@@ -931,6 +1388,9 @@ updateWeb: dist
 	scp -r html allanach@login.hepforge.org:~/softsusy/public_html; \
 	scp -r CHANGES allanach@login.hepforge.org:~/softsusy/public_html/CHANGES.${VERSION}.html; \
 	rm -fr html *.tar.gz
+
+install-data-local:
+	rm -f softsusy.x softsusy-nmssm.x softpoint.x rpvsoftsusy.x rpvneut.x *.la
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
