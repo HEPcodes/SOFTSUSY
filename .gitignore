@@ -1,19 +1,29 @@
 # Products of ./configure
-Config/config.h
-Config/stamp-h1
-Makefile
-config.status
-config.log
-libtool
-doc/Makefile
-src/.deps
-src/Makefile
+/Config/config.h
+/Config/stamp-h1
+/Makefile
+/config.status
+/config.log
+/libtool
+/src/.deps
+/src/two_loop_thresholds/.deps
 
 # Products of make
-.dirstamp
-.libs
-src/*.lo
-src/*.o
-src/libsoft.la
-*.x
+/.libs
+/src/*.lo
+/src/*.o
+/src/.dirstamp
+/src/.libs
+/*.x
+/libsoft.la
+/doc/*.pdf
+/doc/*.ps
+/doc/*.spl
+/doc/*.dvi
+/doc/*.blg
+/doc/*.bbl
+/doc/*.log
+/doc/*.aux
+/doc/*.toc
+/doc/*.out
 
