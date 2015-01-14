@@ -1,10 +1,29 @@
 # Products of ./configure
+<<<<<<< HEAD
+=======
 /Config/config.h
 /Config/stamp-h1
+>>>>>>> a1f7a4cca370740dff65207993bfe80c0f347017
 /Makefile
 /config.status
 /config.log
 /libtool
+<<<<<<< HEAD
+/Config/config.h
+/Config/stamp-h1
+/src/.deps
+/src/two_loop_thresholds/.deps/
+
+# Products of make
+/.libs
+/src/.dirstamp
+/src/.libs
+/src/*.lo
+/src/*.o
+
+/libsoft.la
+/*.x
+=======
 /src/.deps
 /src/two_loop_thresholds/.deps
 
@@ -26,4 +45,5 @@
 /doc/*.aux
 /doc/*.toc
 /doc/*.out
+>>>>>>> a1f7a4cca370740dff65207993bfe80c0f347017
 
