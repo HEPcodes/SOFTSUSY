@@ -92,15 +92,14 @@ bin_PROGRAMS = softsusy.x$(EXEEXT) softsusy-nmssm.x$(EXEEXT) \
 DIST_COMMON = $(srcdir)/src/softsusy.amk \
 	$(srcdir)/src/two_loop_thresholds/mssmparam.amk \
 	$(srcdir)/src/two_loop_thresholds/two_loop_th.amk \
-	$(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk \
-	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
-	$(top_srcdir)/configure $(am__configure_deps) \
-	$(top_srcdir)/Config/config.h.in $(top_srcdir)/Config/depcomp \
-	$(am__dist_data_DATA_DIST) $(am__dist_pkgdata_DATA_DIST) \
-	$(am__pkginclude_HEADERS_DIST) COPYING INSTALL README TODO \
-	Config/compile Config/config.guess Config/config.sub \
-	Config/depcomp Config/install-sh Config/missing \
-	Config/ltmain.sh $(top_srcdir)/Config/compile \
+	$(srcdir)/inOutFiles/inOut.amk $(srcdir)/Makefile.in \
+	$(srcdir)/Makefile.am $(top_srcdir)/configure \
+	$(am__configure_deps) $(top_srcdir)/Config/config.h.in \
+	$(top_srcdir)/Config/depcomp $(am__dist_data_DATA_DIST) \
+	$(am__dist_pkgdata_DATA_DIST) $(am__pkginclude_HEADERS_DIST) \
+	COPYING INSTALL README TODO Config/compile Config/config.guess \
+	Config/config.sub Config/depcomp Config/install-sh \
+	Config/missing Config/ltmain.sh $(top_srcdir)/Config/compile \
 	$(top_srcdir)/Config/config.guess \
 	$(top_srcdir)/Config/config.sub \
 	$(top_srcdir)/Config/install-sh $(top_srcdir)/Config/ltmain.sh \
@@ -227,11 +226,11 @@ libmssmparam_la_OBJECTS = $(am_libmssmparam_la_OBJECTS)
 libsoft_la_LIBADD =
 am_libsoft_la_OBJECTS = src/def.lo src/linalg.lo src/lowe.lo \
 	src/numerics.lo src/rpvneut.lo src/physpars.lo src/rge.lo \
-	src/nmssm2loop.lo src/dilogwrap.lo src/nmssmsoftsusy.lo \
-	src/nmssmsusy.lo src/nmssmsoftpars.lo src/nmssmUtils.lo \
-	src/susy.lo src/utils.lo src/mssmUtils.lo src/tensor.lo \
-	src/rpvsusypars.lo src/rpvsoft.lo src/flavoursoft.lo \
-	src/twoloophiggs.lo
+	src/nmssm2loop.lo src/dilogwrap.lo src/softsusy.lo \
+	src/nmssmsoftsusy.lo src/nmssmsusy.lo src/nmssmsoftpars.lo \
+	src/nmssmUtils.lo src/softpars.lo src/susy.lo src/utils.lo \
+	src/mssmUtils.lo src/tensor.lo src/rpvsusypars.lo \
+	src/rpvsoft.lo src/flavoursoft.lo src/twoloophiggs.lo
 libsoft_la_OBJECTS = $(am_libsoft_la_OBJECTS)
 libsoft_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -373,12 +372,12 @@ am__pkginclude_HEADERS_DIST =  \
 	src/two_loop_thresholds/tquark_corrections.hpp \
 	src/two_loop_thresholds/bquark_corrections.hpp \
 	src/two_loop_thresholds/tau_corrections.hpp $(addprefix src/, \
-	def.h main.h numerics.h softpars.h softpars.cpp susy.h \
-	linalg.h physpars.h softpoint.h twoloophiggs.h nmssm2loop.h \
-	dilogwrap.h lowe.h mycomplex.h rge.h softsusy.h softsusy.cpp \
-	utils.h mssmUtils.h rpvsoft.h rpvsusypars.h tensor.h rpvmain.h \
-	flavoursoft.h xpr-base.h xpr-matrix.h xpr-vector.h rpvneut.h \
-	nmssmsusy.h nmssmsoftpars.h nmssmsoftsusy.h nmssmUtils.h)
+	def.h main.h numerics.h softpars.h susy.h linalg.h physpars.h \
+	softpoint.h twoloophiggs.h nmssm2loop.h dilogwrap.h lowe.h \
+	mycomplex.h rge.h softsusy.h utils.h mssmUtils.h rpvsoft.h \
+	rpvsusypars.h tensor.h rpvmain.h flavoursoft.h xpr-base.h \
+	xpr-matrix.h xpr-vector.h rpvneut.h nmssmsusy.h \
+	nmssmsoftpars.h nmssmsoftsusy.h nmssmUtils.h)
 HEADERS = $(pkginclude_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -517,7 +516,7 @@ build_vendor = @build_vendor@
 builddir = @builddir@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docdir = ${datadir}/doc/${PACKAGE}
+docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host = @host@
@@ -562,15 +561,15 @@ EXTRA_DIST = $(am__append_10) src/nmspec.f \
 	src/two_loop_thresholds/tquark_corrections.hpp \
 	src/nmh_slhainp.f
 pkginclude_HEADERS = $(am__append_11) $(addprefix src/, def.h main.h \
-	numerics.h softpars.h softpars.cpp susy.h linalg.h physpars.h \
-	softpoint.h twoloophiggs.h nmssm2loop.h dilogwrap.h lowe.h \
-	mycomplex.h rge.h softsusy.h softsusy.cpp utils.h mssmUtils.h \
-	rpvsoft.h rpvsusypars.h tensor.h rpvmain.h flavoursoft.h \
-	xpr-base.h xpr-matrix.h xpr-vector.h rpvneut.h nmssmsusy.h \
-	nmssmsoftpars.h nmssmsoftsusy.h nmssmUtils.h)
+	numerics.h softpars.h susy.h linalg.h physpars.h softpoint.h \
+	twoloophiggs.h nmssm2loop.h dilogwrap.h lowe.h mycomplex.h \
+	rge.h softsusy.h utils.h mssmUtils.h rpvsoft.h rpvsusypars.h \
+	tensor.h rpvmain.h flavoursoft.h xpr-base.h xpr-matrix.h \
+	xpr-vector.h rpvneut.h nmssmsusy.h nmssmsoftpars.h \
+	nmssmsoftsusy.h nmssmUtils.h)
 dist_pkgdata_DATA = $(am__append_20) softsusy_nmssmtools.x.in \
 	setup_nmssmtools.sh Makefile.nmssmtools CHANGES GUIDELINES \
-	COPYING $(DOCFILES)
+	COPYING $(doc_DATA)
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 AUTOMAKE_OPTIONS = subdir-objects
 softsusy_x_SOURCES = src/main.cpp $(am__append_12)
@@ -627,21 +626,14 @@ rpvneut_x_LDADD = libsoft.la $(am__append_5) $(am__append_19)
 
 libsoft_la_SOURCES = \
 src/def.cpp src/linalg.cpp src/lowe.cpp src/numerics.cpp  src/rpvneut.cpp \
-src/physpars.cpp src/rge.cpp src/nmssm2loop.f src/dilogwrap.f \
+src/physpars.cpp src/rge.cpp src/nmssm2loop.f src/dilogwrap.f src/softsusy.cpp\
  src/nmssmsoftsusy.cpp src/nmssmsusy.cpp src/nmssmsoftpars.cpp src/nmssmUtils.cpp \
-src/susy.cpp src/utils.cpp src/mssmUtils.cpp \
+src/softpars.cpp src/susy.cpp src/utils.cpp src/mssmUtils.cpp \
 src/tensor.cpp src/rpvsusypars.cpp src/rpvsoft.cpp src/flavoursoft.cpp src/twoloophiggs.f
 
 libsoft_la_LDFLAGS = @FLIBS@
-doc_DATA = doc/rpcManual.pdf \
-           doc/rpvManual.pdf \
-           doc/neutManual.pdf \
-	   doc/nmssmManual.pdf \
-	   doc/threeLoop.pdf
-
-DOCFILES = $(doc_DATA)
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@TESTOUTPUT = inOutFiles/slha2Output inOutFiles/lesHouchesOutput inOutFiles/rpvHouchesOutput \
-@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output inOutFiles/lesHouchesOutput
+@COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/nmssmSLHAZ3Output inOutFiles/nmssmSLHAnoZ3Output
 
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@INPUTFILES = inOutFiles/slha2Input inOutFiles/rpvHouchesInput \
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/nmssmSLHAZ3Input inOutFiles/nmssmSLHAnoZ3Input \
@@ -650,6 +642,15 @@ DOCFILES = $(doc_DATA)
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@OUTPUTFILES = $(TESTOUTPUT) inOutFiles/neutOutputTest inOutFiles/rpvOutputTest \
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/outputTest inOutFiles/outputTest-nmssm
 
+
+# Not making docs in official tag
+#include doc/doc.amk
+doc_DATA = doc/rpcManual.pdf \
+           doc/rpvManual.pdf \
+           doc/neutManual.pdf \
+	   doc/nmssmManual.pdf \
+	   doc/threeLoop.pdf
+
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -657,7 +658,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cpp .f .lo .o .obj
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/inOutFiles/inOut.amk $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -680,7 +681,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/doc/doc.amk $(srcdir)/inOutFiles/inOut.amk:
+$(srcdir)/src/softsusy.amk $(srcdir)/src/two_loop_thresholds/mssmparam.amk $(srcdir)/src/two_loop_thresholds/two_loop_th.amk $(srcdir)/inOutFiles/inOut.amk:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -785,12 +786,14 @@ src/physpars.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/rge.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/nmssm2loop.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/dilogwrap.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/softsusy.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/nmssmsoftsusy.lo: src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/nmssmsusy.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/nmssmsoftpars.lo: src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/nmssmUtils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/softpars.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/susy.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/utils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/mssmUtils.lo: src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
@@ -913,7 +916,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvneutmain.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsoft.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsusypars.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softpars.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softpoint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softsusy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/susy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/tensor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/utils.Plo@am__quote@
@@ -1325,14 +1330,14 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
-	clean-libtool clean-local mostlyclean-am
+	clean-libtool mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf src/$(DEPDIR) src/two_loop_thresholds/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-hdr distclean-libtool distclean-local distclean-tags
+	distclean-hdr distclean-libtool distclean-tags
 
 dvi: dvi-am
 
@@ -1404,17 +1409,17 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_dataDATA \
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-am clean \
 	clean-binPROGRAMS clean-cscope clean-generic \
-	clean-libLTLIBRARIES clean-libtool clean-local cscope \
-	cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
-	dist-gzip dist-lzip dist-shar dist-tarZ dist-xz dist-zip \
-	distcheck distclean distclean-compile distclean-generic \
-	distclean-hdr distclean-libtool distclean-local distclean-tags \
-	distcleancheck distdir distuninstallcheck dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-data-local \
-	install-dist_dataDATA install-dist_pkgdataDATA install-docDATA \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-html install-html-am install-info install-info-am \
+	clean-libLTLIBRARIES clean-libtool cscope cscopelist-am ctags \
+	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-compile distclean-generic distclean-hdr \
+	distclean-libtool distclean-tags distcleancheck distdir \
+	distuninstallcheck dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS install-data \
+	install-data-am install-data-local install-dist_dataDATA \
+	install-dist_pkgdataDATA install-docDATA install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am \
 	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
 	install-pkgincludeHEADERS install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
@@ -1430,37 +1435,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_dataDATA \
 
 @COMPILE_FULL_SUSY_THRESHOLD_TRUE@%.cpp : %.cpp.in
 @COMPILE_FULL_SUSY_THRESHOLD_TRUE@	sed -e 's,\@th_datadir\@,$(th_datadir),g' $< > $@
-
-#EXTRA_DIST += doc/rpcManual.pdf doc/rpvManual.pdf doc/neutManual.pdf \
-#	   doc/nmssmManual.pdf doc/threeLoop.pdf
-#        doc/anc/*.eps \
-#	doc/rpcManual.tex \
-#	doc/rpvManual.tex \
-#	doc/neutManual.tex \
-#	doc/nmssmManual.tex \
-#       doc/threeLoop.bib \
-#	doc/tableTwo.tex \
-#	doc/threeLoop.tex \
-#	doc/tableOne.tex \
-#	doc/axodraw.sty \
-#	doc/jheppub.sty \
-#	doc/elsarticle.cls doc/elsarticle-num.bst
-
-# doc: $(doc_DATA)
-
-doc/%.pdf: doc/%.tex
-	cd $(top_builddir)/doc;\
-	latex $(*F).tex ; bibtex $(*F); latex $(*F).tex; latex $(*F).tex ;\
-	dvips -f $(*F) > $(*F).ps ;\
-	ps2pdf $(*F).ps
-
-doc/threeLoop.tex: doc/tableOne.tex doc/tableTwo.tex doc/threeLoop.bib
-
-clean-local:
-	-rm -f doc/*.log doc/*.spl doc/*.aux doc/*.dvi doc/*.ps doc/*.toc doc/*.out doc/*.pdf
-
-distclean-local: clean-local
-	-rm -f $(doc_DATA)
 
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@inOutFiles/%Output : inOutFiles/%Input softpoint.x 
 @COMPILE_FULL_SUSY_THRESHOLD_FALSE@	$(install_sh) -d inOutFiles
