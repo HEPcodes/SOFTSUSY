@@ -6,7 +6,8 @@
 /Config/config.h
 /Config/stamp-h1
 /src/.deps
-/src/two_loop_thresholds/.deps/
+/src/**/.deps/
+/ver
 
 # Products of make
 /.libs
