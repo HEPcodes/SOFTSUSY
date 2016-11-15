@@ -1,11 +1,14 @@
 /* Config/config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Compile 3-loop RGE for SUSY parameters */
+#undef COMPILE_THREE_LOOP_RGE
+
 /* Compile leading two-loop SUSY threshold corrections to fermionic third
    generation Yukawa couplings */
-#undef COMPILE_FULL_SUSY_THRESHOLD
+#undef COMPILE_TWO_LOOP_GAUGE_YUKAWA
 
-/* Complile 3-loop RGE */
-#undef COMPILE_THREE_LOOP_RGE
+/* Compile higher loop */
+#undef COMPILE_TWO_LOOP_SPARTICLE_MASS
 
 /* Threshold correction debugging output */
 #undef DEBUG
