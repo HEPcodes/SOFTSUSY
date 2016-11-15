@@ -91,9 +91,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = cmsdilep.x$(EXEEXT) softsusy.x$(EXEEXT) \
-	softsusy-nmssm.x$(EXEEXT) softpoint.x$(EXEEXT) \
-	rpvsoftsusy.x$(EXEEXT) rpvneut.x$(EXEEXT) higher.x$(EXEEXT) \
+bin_PROGRAMS = softsusy.x$(EXEEXT) softsusy-nmssm.x$(EXEEXT) \
+	softpoint.x$(EXEEXT) rpvsoftsusy.x$(EXEEXT) rpvneut.x$(EXEEXT) \
 	$(am__EXEEXT_1)
 DIST_COMMON = $(srcdir)/src/softsusy.amk \
 	$(srcdir)/src/two_loop_thresholds/mssmparam.amk \
@@ -112,11 +111,11 @@ DIST_COMMON = $(srcdir)/src/softsusy.amk \
 	$(top_srcdir)/Config/config.sub \
 	$(top_srcdir)/Config/install-sh $(top_srcdir)/Config/ltmain.sh \
 	$(top_srcdir)/Config/missing
-@LOOPTOOLS_TRUE@am__append_1 = -looptools
-@LOOPTOOLS_TRUE@am__append_2 = -looptools
-@LOOPTOOLS_TRUE@am__append_3 = -looptools
-@LOOPTOOLS_TRUE@am__append_4 = -looptools
-@LOOPTOOLS_TRUE@am__append_5 = -looptools
+@LOOPTOOLS_TRUE@am__append_1 = -looptools -lgfortran
+@LOOPTOOLS_TRUE@am__append_2 = -looptools -lgfortran
+@LOOPTOOLS_TRUE@am__append_3 = -looptools -lgfortran
+@LOOPTOOLS_TRUE@am__append_4 = -looptools -lgfortran
+@LOOPTOOLS_TRUE@am__append_5 = -looptools -lgfortran
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_6 = -I$(srcdir)/src
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_7 = libmssmparam.la \
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la
@@ -148,25 +147,16 @@ DIST_COMMON = $(srcdir)/src/softsusy.amk \
 
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_12 = src/two_loop_thresholds/twoloopbubble.cpp 
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_13 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_14 = src/two_loop_thresholds/twoloopbubble.cpp 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_15 = lib2lthresh.la \
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la \
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la \
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_16 = scansusy.x \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	scansusy_slha.x
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_17 = libsupermodel.la libtsil.la 
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_18 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_19 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_14 = higher.x 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_15 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_16 = lib2lthresh.la libmssmparam.la 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_17 = src/two_loop_thresholds/twoloopbubble.cpp 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_18 = lib2lthresh.la libmssmparam.la 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_19 = lib2lthresh.la libmssmparam.la 
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_20 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_21 = src/two_loop_thresholds/twoloopbubble.cpp 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_22 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_23 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_24 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__append_25 = lib2lthresh.la libmssmparam.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_26 = libtsil.la \
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_21 = libtsil.la \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libsupermodel.la
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_27 = src/supermodel/tsil/internal.h \
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_22 = src/supermodel/tsil/internal.h \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/tsil/tsil_fortran.h \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/tsil/tsil_global.h \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/tsil/tsil_names.h \
@@ -184,14 +174,12 @@ DIST_COMMON = $(srcdir)/src/softsusy.amk \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/supermodel/supermodel_defs.h \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/supermodel/supermodel.h \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/supermodel/tsil/tsil.h
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_28 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_29 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_30 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_31 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_32 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_33 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_34 = libsupermodel.la libtsil.la 
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_FALSE@am__append_35 = $(INPUTFILES) $(OUTPUTFILES) 
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_23 = libsupermodel.la libtsil.la 
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_24 = libsupermodel.la libtsil.la 
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_25 = libsupermodel.la libtsil.la 
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_26 = libsupermodel.la libtsil.la 
+@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__append_27 = libsupermodel.la libtsil.la 
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_FALSE@am__append_28 = $(INPUTFILES) $(OUTPUTFILES) 
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -388,64 +376,47 @@ am__libtsil_la_SOURCES_DIST = src/supermodel/tsil/initialize.c \
 libtsil_la_OBJECTS = $(am_libtsil_la_OBJECTS)
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am_libtsil_la_rpath = -rpath \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	$(libdir)
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__EXEEXT_1 = scansusy.x$(EXEEXT) \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	scansusy_slha.x$(EXEEXT)
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am__EXEEXT_1 = higher.x$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
-am_cmsdilep_x_OBJECTS = src/cmsdilep.$(OBJEXT)
-cmsdilep_x_OBJECTS = $(am_cmsdilep_x_OBJECTS)
-cmsdilep_x_DEPENDENCIES = libsoft.la $(am__append_25) $(am__append_33)
 am__higher_x_SOURCES_DIST = src/higher.cpp \
 	src/two_loop_thresholds/twoloopbubble.cpp
-@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__objects_1 = src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
-am_higher_x_OBJECTS = src/higher.$(OBJEXT) $(am__objects_1)
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@am_higher_x_OBJECTS = src/higher.$(OBJEXT) \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
 higher_x_OBJECTS = $(am_higher_x_OBJECTS)
-higher_x_DEPENDENCIES = libsoft.la $(am__append_15) $(am__append_34)
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@higher_x_DEPENDENCIES = libsoft.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	lib2lthresh.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libmssmparam.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libsupermodel.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libtsil.la
 am_rpvneut_x_OBJECTS = src/rpvneutmain.$(OBJEXT)
 rpvneut_x_OBJECTS = $(am_rpvneut_x_OBJECTS)
 am__DEPENDENCIES_1 =
 rpvneut_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
-	$(am__append_24) $(am__append_32)
+	$(am__append_20) $(am__append_27)
 am_rpvsoftsusy_x_OBJECTS = src/rpvmain.$(OBJEXT)
 rpvsoftsusy_x_OBJECTS = $(am_rpvsoftsusy_x_OBJECTS)
 rpvsoftsusy_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
-	$(am__append_23) $(am__append_31)
-am__scansusy_x_SOURCES_DIST = src/scan.cpp \
-	src/two_loop_thresholds/twoloopbubble.cpp
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am_scansusy_x_OBJECTS = src/scan.$(OBJEXT) \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
-scansusy_x_OBJECTS = $(am_scansusy_x_OBJECTS)
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_x_DEPENDENCIES = libsoft.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	$(am__append_17)
-am__scansusy_slha_x_SOURCES_DIST = src/scan_slha.cpp \
-	src/two_loop_thresholds/twoloopbubble.cpp
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am_scansusy_slha_x_OBJECTS = src/scan_slha.$(OBJEXT) \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
-scansusy_slha_x_OBJECTS = $(am_scansusy_slha_x_OBJECTS)
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_slha_x_DEPENDENCIES = libsoft.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	$(am__append_18)
+	$(am__append_19) $(am__append_26)
 am__softpoint_x_SOURCES_DIST = src/softpoint.cpp \
 	src/two_loop_thresholds/twoloopbubble.cpp
+@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@am__objects_1 = src/two_loop_thresholds/twoloopbubble.$(OBJEXT)
 am_softpoint_x_OBJECTS = src/softpoint.$(OBJEXT) $(am__objects_1)
 softpoint_x_OBJECTS = $(am_softpoint_x_OBJECTS)
 softpoint_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
-	$(am__append_22) $(am__append_30)
+	$(am__append_18) $(am__append_25)
 am__softsusy_nmssm_x_SOURCES_DIST = src/main-nmssm.cpp \
 	src/two_loop_thresholds/twoloopbubble.cpp
 am_softsusy_nmssm_x_OBJECTS = src/main-nmssm.$(OBJEXT) \
 	$(am__objects_1)
 softsusy_nmssm_x_OBJECTS = $(am_softsusy_nmssm_x_OBJECTS)
 softsusy_nmssm_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
-	$(am__append_20) $(am__append_29)
+	$(am__append_16) $(am__append_24)
 am__softsusy_x_SOURCES_DIST = src/main.cpp \
 	src/two_loop_thresholds/twoloopbubble.cpp
 am_softsusy_x_OBJECTS = src/main.$(OBJEXT) $(am__objects_1)
 softsusy_x_OBJECTS = $(am_softsusy_x_OBJECTS)
 softsusy_x_DEPENDENCIES = libsoft.la $(am__DEPENDENCIES_1) \
-	$(am__append_13) $(am__append_28)
+	$(am__append_13) $(am__append_23)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -516,17 +487,14 @@ am__v_F77LD_1 =
 SOURCES = $(lib2lthresh_la_SOURCES) $(nodist_lib2lthresh_la_SOURCES) \
 	$(libmssmparam_la_SOURCES) $(libsoft_la_SOURCES) \
 	$(libsupermodel_la_SOURCES) $(libtsil_la_SOURCES) \
-	$(cmsdilep_x_SOURCES) $(higher_x_SOURCES) $(rpvneut_x_SOURCES) \
-	$(rpvsoftsusy_x_SOURCES) $(scansusy_x_SOURCES) \
-	$(scansusy_slha_x_SOURCES) $(softpoint_x_SOURCES) \
+	$(higher_x_SOURCES) $(rpvneut_x_SOURCES) \
+	$(rpvsoftsusy_x_SOURCES) $(softpoint_x_SOURCES) \
 	$(softsusy_nmssm_x_SOURCES) $(softsusy_x_SOURCES)
 DIST_SOURCES = $(am__lib2lthresh_la_SOURCES_DIST) \
 	$(am__libmssmparam_la_SOURCES_DIST) $(libsoft_la_SOURCES) \
 	$(am__libsupermodel_la_SOURCES_DIST) \
-	$(am__libtsil_la_SOURCES_DIST) $(cmsdilep_x_SOURCES) \
-	$(am__higher_x_SOURCES_DIST) $(rpvneut_x_SOURCES) \
-	$(rpvsoftsusy_x_SOURCES) $(am__scansusy_x_SOURCES_DIST) \
-	$(am__scansusy_slha_x_SOURCES_DIST) \
+	$(am__libtsil_la_SOURCES_DIST) $(am__higher_x_SOURCES_DIST) \
+	$(rpvneut_x_SOURCES) $(rpvsoftsusy_x_SOURCES) \
 	$(am__softpoint_x_SOURCES_DIST) \
 	$(am__softsusy_nmssm_x_SOURCES_DIST) \
 	$(am__softsusy_x_SOURCES_DIST)
@@ -750,7 +718,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-lib_LTLIBRARIES = libsoft.la $(am__append_7) $(am__append_26)
+lib_LTLIBRARIES = libsoft.la $(am__append_7) $(am__append_21)
 CLEANFILES = $(am__append_9) $(OUTPUTFILES) *.x
 BUILT_SOURCES = $(am__append_8)
 EXTRA_DIST = $(am__append_10) src/nmspec.f \
@@ -763,37 +731,33 @@ EXTRA_DIST = $(am__append_10) src/nmspec.f \
 	src/two_loop_thresholds/tquark_corrections.cpp.in \
 	src/two_loop_thresholds/tquark_corrections.hpp \
 	src/nmh_slhainp.f
-pkginclude_HEADERS = $(am__append_11) $(am__append_27) $(addprefix \
+pkginclude_HEADERS = $(am__append_11) $(am__append_22) $(addprefix \
 	src/, def.h main.h numerics.h softpars.h susy.h linalg.h \
 	physpars.h softpoint.h twoloophiggs.h nmssm2loop.h dilogwrap.h \
 	lowe.h mycomplex.h rge.h softsusy.h utils.h mssmUtils.h \
 	rpvsoft.h rpvsusypars.h tensor.h rpvmain.h flavoursoft.h \
 	xpr-base.h xpr-matrix.h xpr-vector.h rpvneut.h nmssmsusy.h \
 	nmssmsoftpars.h higher_order.h nmssmsoftsusy.h nmssmUtils.h)
-dist_pkgdata_DATA = $(am__append_35) softsusy_nmssmtools.x.in \
+dist_pkgdata_DATA = $(am__append_28) softsusy_nmssmtools.x.in \
 	setup_nmssmtools.sh Makefile.nmssmtools CHANGES GUIDELINES \
 	COPYING $(doc_DATA)
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 AUTOMAKE_OPTIONS = subdir-objects
 softsusy_x_SOURCES = src/main.cpp $(am__append_12)
 softsusy_x_LDADD = libsoft.la $(am__append_1) $(am__append_13) \
-	$(am__append_28)
-higher_x_SOURCES = src/higher.cpp $(am__append_14)
-higher_x_LDADD = libsoft.la $(am__append_15) $(am__append_34)
-cmsdilep_x_SOURCES = src/cmsdilep.cpp 
-cmsdilep_x_LDADD = libsoft.la $(am__append_25) $(am__append_33)
-softsusy_nmssm_x_SOURCES = src/main-nmssm.cpp $(am__append_19)
-softsusy_nmssm_x_LDADD = libsoft.la $(am__append_2) $(am__append_20) \
-	$(am__append_29)
-softpoint_x_SOURCES = src/softpoint.cpp $(am__append_21)
-softpoint_x_LDADD = libsoft.la $(am__append_3) $(am__append_22) \
-	$(am__append_30)
+	$(am__append_23)
+softsusy_nmssm_x_SOURCES = src/main-nmssm.cpp $(am__append_15)
+softsusy_nmssm_x_LDADD = libsoft.la $(am__append_2) $(am__append_16) \
+	$(am__append_24)
+softpoint_x_SOURCES = src/softpoint.cpp $(am__append_17)
+softpoint_x_LDADD = libsoft.la $(am__append_3) $(am__append_18) \
+	$(am__append_25)
 rpvsoftsusy_x_SOURCES = src/rpvmain.cpp 
-rpvsoftsusy_x_LDADD = libsoft.la $(am__append_4) $(am__append_23) \
-	$(am__append_31)
+rpvsoftsusy_x_LDADD = libsoft.la $(am__append_4) $(am__append_19) \
+	$(am__append_26)
 rpvneut_x_SOURCES = src/rpvneutmain.cpp 
-rpvneut_x_LDADD = libsoft.la $(am__append_5) $(am__append_24) \
-	$(am__append_32)
+rpvneut_x_LDADD = libsoft.la $(am__append_5) $(am__append_20) \
+	$(am__append_27)
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@libmssmparam_la_SOURCES = \
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@src/two_loop_thresholds/mssmparam.cpp \
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@src/two_loop_thresholds/mssmparam.hpp \
@@ -836,18 +800,13 @@ rpvneut_x_LDADD = libsoft.la $(am__append_5) $(am__append_24) \
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@tau_dec_2.gar \
 @COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@tquark_2loop_strong_pole.gar)
 
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_x_SOURCES = src/scan.cpp \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	src/two_loop_thresholds/twoloopbubble.cpp
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_x_LDADD = libsoft.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	$(am__append_17)
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_slha_x_SOURCES = src/scan_slha.cpp \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	src/two_loop_thresholds/twoloopbubble.cpp
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@scansusy_slha_x_LDADD = libsoft.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	lib2lthresh.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	libmssmparam.la \
-@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@	$(am__append_18)
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@higher_x_SOURCES = src/higher.cpp \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	src/two_loop_thresholds/twoloopbubble.cpp
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@higher_x_LDADD = libsoft.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	lib2lthresh.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libmssmparam.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libsupermodel.la \
+@COMPILE_THREE_LOOP_RGE_TRUE@@COMPILE_TWO_LOOP_GAUGE_YUKAWA_TRUE@@COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@	libtsil.la
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@libtsil_la_SOURCES = \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@src/supermodel/tsil/initialize.c \
 @COMPILE_TWO_LOOP_SPARTICLE_MASS_TRUE@src/supermodel/tsil/evaluate.c \
@@ -1295,12 +1254,6 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-src/cmsdilep.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-
-cmsdilep.x$(EXEEXT): $(cmsdilep_x_OBJECTS) $(cmsdilep_x_DEPENDENCIES) $(EXTRA_cmsdilep_x_DEPENDENCIES) 
-	@rm -f cmsdilep.x$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(cmsdilep_x_OBJECTS) $(cmsdilep_x_LDADD) $(LIBS)
 src/higher.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/two_loop_thresholds/twoloopbubble.$(OBJEXT):  \
@@ -1322,17 +1275,6 @@ src/rpvmain.$(OBJEXT): src/$(am__dirstamp) \
 rpvsoftsusy.x$(EXEEXT): $(rpvsoftsusy_x_OBJECTS) $(rpvsoftsusy_x_DEPENDENCIES) $(EXTRA_rpvsoftsusy_x_DEPENDENCIES) 
 	@rm -f rpvsoftsusy.x$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(rpvsoftsusy_x_OBJECTS) $(rpvsoftsusy_x_LDADD) $(LIBS)
-src/scan.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
-
-scansusy.x$(EXEEXT): $(scansusy_x_OBJECTS) $(scansusy_x_DEPENDENCIES) $(EXTRA_scansusy_x_DEPENDENCIES) 
-	@rm -f scansusy.x$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(scansusy_x_OBJECTS) $(scansusy_x_LDADD) $(LIBS)
-src/scan_slha.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-
-scansusy_slha.x$(EXEEXT): $(scansusy_slha_x_OBJECTS) $(scansusy_slha_x_DEPENDENCIES) $(EXTRA_scansusy_slha_x_DEPENDENCIES) 
-	@rm -f scansusy_slha.x$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(scansusy_slha_x_OBJECTS) $(scansusy_slha_x_LDADD) $(LIBS)
 src/softpoint.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 
@@ -1365,7 +1307,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/cmsdilep.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/def.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/flavoursoft.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/higher.Po@am__quote@
@@ -1386,8 +1327,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvneutmain.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsoft.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/rpvsusypars.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/scan.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/scan_slha.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softpars.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softpoint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softsusy.Plo@am__quote@

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([softsusy],[3.7.0],[softsusy@projects.hepforge.org],[softsusy])
+AC_INIT([softsusy],[3.7.1],[softsusy@projects.hepforge.org],[softsusy])
 AC_CONFIG_SRCDIR([src])
 AC_CONFIG_AUX_DIR([Config])
 AC_CONFIG_HEADERS([Config/config.h])
@@ -132,7 +132,7 @@ AC_CONFIG_FILES([Makefile])
 
 AC_OUTPUT
 
-# To run with looptools, run: ./configure --enable-looptools CPPFLAGS=-I/home/bca20/code/looptools/LoopTools/install/include LDFLAGS=-L/home/bca20/code/looptools/LoopTools/install/lib/ and add -looptools to src/softsusy.amk libs
+# To run with looptools, run: ./configure FFLAGS="-DQUAD=1" --enable-looptools CPPFLAGS=-I/home/bca20/code/LoopTools-2.13/install/include LDFLAGS=-L/home/bca20/code/LoopTools-2.13/install/lib64
 
 # For GINAC/CLN
 # GINAC_LIBS="-L/usr/local/lib -lginac" GINAC_CFLAGS="-I/usr/local/include" CLN_LIBS="-L/usr/local/lib -lcln" CLN_CFLAGS="-I/usr/local/include" ./configure --enable-two-loop-gauge-yukawa-compilation --enable-three-loop-rge-compilation

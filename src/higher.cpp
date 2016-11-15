@@ -3,7 +3,7 @@
    File:        higher.cpp
    Author:      B.C. Allanach, S. Martin, D. Robertson and R. Ruiz de Austri
    Manual:      B.C. Allanach, S. Martin, D. Robertson and R. Ruiz de Austri, 
-                arXiv:16??.?????
+                arXiv:1601.06657
    Webpage:     http://allanach.home.cern.ch/allanach/softsusy.html
    Description: main calling program to be put in src/ in the softsusy
                 directory. Running make will produce an executable called
@@ -19,17 +19,7 @@
                 below to point to the directory you've placed nllfast13 in. 
 */
 
-#include <iostream>
-#include "mycomplex.h"
-#include "def.h"
-#include "linalg.h"
-#include "lowe.h"
-#include "rge.h"
-#include "softsusy.h"
-#include "softpars.h"
-#include "susy.h"
-#include "utils.h"
-#include "numerics.h"
+#include "higher.h"
 
 #ifdef COMPILE_TWO_LOOP_SPARTICLE_MASS
 

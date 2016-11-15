@@ -18,7 +18,7 @@
 
 #include <cmath>
 namespace softsusy{
-  const char SOFTSUSY_VERSION[] = "3.7.0";
+  const char SOFTSUSY_VERSION[] = "3.7.1";
   /// uncomment if you want checking of vector/matrices bounds: slows code
   /// down. It also now checks over/underflows in matrix multiplication etc
   /// #define ARRAY_BOUNDS_CHECKING 
@@ -100,12 +100,9 @@ namespace softsusy{
   extern long idummySave;
   extern int numTry;
 
-#ifdef COMPILE_THREE_LOOP_RGE
   /// Controls the use of MSSM three-loop RGEs
   extern bool USE_THREE_LOOP_RGE;
-#endif
 
-#ifdef COMPILE_TWO_LOOP_GAUGE_YUKAWA
   /// Threshold to prevent the re-evaluation of two-loop leading SUSY 
   /// thresholds corrections
   extern double TWOLOOP_NUM_THRESH;
@@ -125,17 +122,12 @@ namespace softsusy{
 	 ENABLE_TWO_LOOP_MTAU_YUK = 0x10    
   };    
 
-#endif
-
-#ifdef COMPILE_TWO_LOOP_SPARTICLE_MASS
   /// Various two-loop thresholds, eg 2-loop QCD corrections to m_gluino
   extern bool USE_TWO_LOOP_SPARTICLE_MASS;
   /// If = 0, no expansion for gluino. If = 1, expand around gluino and squark
   /// pole masses. If = 2, expand only around gluino pole mass rather than the
   /// tree-level mass and iterate. 1 and 2 are a little slower. 
   extern int expandAroundGluinoPole;
-#endif
-  
 }
 
 #endif
