@@ -1,3 +1,8 @@
+**SOFTSUSY is now provided in [the official repository](https://github.com/BAllanach/softsusy/)**.
+
+This unoffial repository is no longer maintained.
+
+
 [SOFTSUSY](https://softsusy.hepforge.org/)
 =========
 
